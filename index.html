@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hub AI</title>
+    <style>
+        /* 1. Global Reset & Dark Theme */
+        body { background-color: #090d16 !important; color: #f1f5f9 !important; font-family: -apple-system, sans-serif; margin: 0; }
+        
+        /* 2. Premium Components */
+        .glass-card { background: #0c1222; border: 1px solid #1e293b; padding: 20px; border-radius: 20px; margin-bottom: 16px; }
+        
+        .btn-premium {
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            color: white; padding: 14px 24px; border-radius: 16px; border: none;
+            font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .btn-premium:active { transform: scale(0.95); }
+
+        /* 3. Sidebar Logic */
+        #sidebar { 
+            position: fixed; top: 0; left: 0; height: 100%; width: 280px; 
+            background: #050811; border-right: 1px solid #1e293b; 
+            z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease; 
+        }
+        #sidebar.active { transform: translateX(0); }
+        #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 90; display: none; }
+        #overlay.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
+    <aside id="sidebar">
+        <div style="padding: 20px;">
+            <h2 style="margin-bottom: 20px;">Hub Navigation</h2>
+            <div style="margin-bottom: 15px; color: #818cf8;">🏠 Dashboard</div>
+            <div style="color: #94a3b8;">💬 New Chat</div>
+        </div>
+    </aside>
+
+    <div style="display: flex; align-items: center; gap: 15px; padding: 20px;">
+        <button onclick="toggleSidebar()" style="background:none; border:none; color:white; font-size:24px;">☰</button>
+        <h1 style="color: #818cf8; font-weight: bold; font-size: 20px;">⚡ Smart Hub</h1>
+    </div>
+
+    <div style="padding: 20px;">
+        <div class="glass-card">
+            <h2 style="font-size: 18px; margin: 0 0 5px 0;">Main Menu Dashboard</h2>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">System Ready • Awaiting Input</p>
+            <a href="chat.html" class="btn-premium" style="text-decoration: none;">
+    <span>💬</span> Start AI Assistant
+</a>
+
+        </div>
+
+        <div class="glass-card">
+            <h2 style="font-size: 16px;">💻 Workspace</h2>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">Manage repositories and code script assets.</p>
+        </div>
+        <div class="glass-card">
+            <h2 style="font-size: 16px;">⚙️ Settings</h2>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">Configure internal API keys and credentials.</p>
+        </div>
+        <div class="glass-card">
+            <h2 style="font-size: 16px;">📊 Analytics</h2>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">Monitor system runtime performance metrics.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
