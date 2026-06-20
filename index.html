@@ -5,31 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Hub AI</title>
     <style>
-        /* 1. Global Reset & Dark Theme */
-        body { background-color: #090d16 !important; color: #f1f5f9 !important; font-family: -apple-system, sans-serif; margin: 0; }
-        
-        /* 2. Premium Components */
-        .glass-card { background: #0c1222; border: 1px solid #1e293b; padding: 20px; border-radius: 20px; margin-bottom: 16px; }
-        
-        .btn-premium {
-            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-            color: white; padding: 14px 24px; border-radius: 16px; border: none;
-            font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+        /* 1. Splash Screen Styles */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background: #050811;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
         }
-        .btn-premium:active { transform: scale(0.95); }
+        .fade-out { opacity: 0; pointer-events: none; }
+        
+        .logo-text { font-size: 32px; font-weight: bold; color: #818cf8; letter-spacing: 1px; }
 
-        /* 3. Sidebar Logic */
-        #sidebar { 
-            position: fixed; top: 0; left: 0; height: 100%; width: 280px; 
-            background: #050811; border-right: 1px solid #1e293b; 
-            z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease; 
-        }
+        /* Existing Styles */
+        body { background-color: #090d16 !important; color: #f1f5f9 !important; font-family: -apple-system, sans-serif; margin: 0; }
+        .glass-card { background: #0c1222; border: 1px solid #1e293b; padding: 20px; border-radius: 20px; margin-bottom: 16px; }
+        .btn-premium { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: white; padding: 14px 24px; border-radius: 16px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; text-decoration: none;}
+        
+        #sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; background: #050811; border-right: 1px solid #1e293b; z-index: 100; transform: translateX(-100%); transition: transform 0.3s ease; }
         #sidebar.active { transform: translateX(0); }
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 90; display: none; }
         #overlay.active { display: block; }
     </style>
 </head>
 <body>
+
+    <div id="splash-screen">
+        <div class="logo-text">⚡ Smart Hub</div>
+        <p style="color: #64748b; margin-top: 10px;">Initializing System...</p>
+    </div>
 
     <div id="overlay" onclick="toggleSidebar()"></div>
     <aside id="sidebar">
@@ -49,27 +57,18 @@
         <div class="glass-card">
             <h2 style="font-size: 18px; margin: 0 0 5px 0;">Main Menu Dashboard</h2>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">System Ready • Awaiting Input</p>
-            <a href="chat.html" class="btn-premium" style="text-decoration: none;">
-    <span>💬</span> Start AI Assistant
-</a>
-
+            <a href="chat.html" class="btn-premium"><span>💬</span> Start AI Assistant</a>
         </div>
-
-        <div class="glass-card">
-            <h2 style="font-size: 16px;">💻 Workspace</h2>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">Manage repositories and code script assets.</p>
         </div>
-        <div class="glass-card">
-            <h2 style="font-size: 16px;">⚙️ Settings</h2>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">Configure internal API keys and credentials.</p>
-        </div>
-        <div class="glass-card">
-            <h2 style="font-size: 16px;">📊 Analytics</h2>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 5px;">Monitor system runtime performance metrics.</p>
-        </div>
-    </div>
 
     <script>
+        // Splash Screen Logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('splash-screen').classList.add('fade-out');
+            }, 2000); // 2000ms = 2 seconds
+        });
+
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
